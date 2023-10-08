@@ -30,6 +30,10 @@ export class Tweet
 
   like(username: string) 
   {
+    let alreadyLiked = this._usernameLikes.some(u => u === username);
+    if (alreadyLiked)
+      throw new Error(`@${username} already liked this tweet`);    
+
     this._usernameLikes.push(username);
   }
 
