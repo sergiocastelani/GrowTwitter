@@ -55,6 +55,7 @@ export class View {
   private static _showFeed() 
   {
     const username = input("Username: ");
+    console.log("---------");
 
     try 
     {
@@ -78,6 +79,7 @@ export class View {
     try 
     {
       UserController.followUser(follower, target);
+      console.log(`@${follower} started following @${target}`);
     } 
     catch (error) 
     {
@@ -96,7 +98,10 @@ export class View {
 
     try 
     {
-      TweetController.like(username, tweetId);
+      const t = TweetController.like(username, tweetId);
+      console.log("-----------------");
+      t.show();
+      console.log("-----------------");
     } 
     catch (error) 
     {
@@ -116,7 +121,11 @@ export class View {
 
     try 
     {
-      TweetController.reply(username, tweetId, content);
+      let t = TweetController.reply(username, tweetId, content);
+      console.log("-----------------");
+      t.show();
+      t.showReplies();
+      console.log("-----------------");
     } 
     catch (error) 
     {

@@ -14,8 +14,8 @@ export class TweetController {
 
     if (content.length < 3)
       throw new Error("Content is too short");
-
-    user.sendTweet(content);
+    
+    return user.sendTweet(content);
   }
 
   //username is who liked the tweet
@@ -41,9 +41,13 @@ export class TweetController {
       throw new Error("Tweet not found");
 
     tweet.like(username);
+    return tweet;
   }
 
-  static reply(replyingUsername: string, tweetId: string, content: string) 
+  /*
+  * @return The original tweet being replied
+  */
+  static reply(replyingUsername: string, tweetId: string, content: string) : Tweet
   {
     let user = UserDb.find(user => user.username === replyingUsername);
     if (!user)
@@ -65,10 +69,8 @@ export class TweetController {
       throw new Error("Tweet not found");
 
     tweet.reply(user.username, content);
-  }
-  
-
-  
+    return tweet;
+  }  
   
 }
 

@@ -31,6 +31,7 @@ export class User {
   sendTweet(content: string) {
     let tweet = new Tweet(this._username, content, "Normal");
     this._tweets.push(tweet);
+    return tweet;
   }
 
   follow(user: User) {
@@ -48,6 +49,7 @@ export class User {
     this._tweets.forEach(tweet => {
       tweet.show();
       tweet.showReplies();
+      console.log("-------------------------------------");
     });
   }
 }
