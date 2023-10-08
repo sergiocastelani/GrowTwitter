@@ -4,32 +4,32 @@ export class Tweet
 {
   private _id: string;
   private _replies: Tweet[];
-  private _userIdLikes: string[];
+  private _usernameLikes: string[];
 
   constructor(
-    private _userId: string,
+    private _username: string,
     private _content: string,
     private _type: "Normal" | "Reply",
   ) 
   {
     this._id = uuidv4();
     this._replies = [];
-    this._userIdLikes = [];
+    this._usernameLikes = [];
   }
 
   //properties
   get id() { return this._id; }
 
   //methods
-  reply(userId: string, content: string) 
+  reply(username: string, content: string) 
   {
-    let tweet = new Tweet(userId, content, "Reply");
+    let tweet = new Tweet(username, content, "Reply");
     this._replies.push(tweet);
   }
 
-  like(userId: string) 
+  like(username: string) 
   {
-    this._userIdLikes.push(userId);
+    this._usernameLikes.push(username);
   }
 
   show() 

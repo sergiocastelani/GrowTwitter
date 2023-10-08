@@ -40,8 +40,35 @@ export class TweetController {
     if (tweet === undefined)
       throw new Error("Tweet not found");
 
-    tweet.like(user.id);
+    tweet.like(username);
   }
+
+  static reply(replyingUsername: string, tweetId: string, content: string) 
+  {
+    let user = UserDb.find(user => user.username === replyingUsername);
+    if (!user)
+      throw new Error("User not found");
+
+    let tweet : Tweet | undefined;
+    UserDb.find( user => {
+      user.tweets.find(t => {
+        if (t.id === tweetId)
+          tweet = t;
+
+        return !!tweet;
+      });
+
+      return !!tweet;
+    });
+
+    if (tweet === undefined)
+      throw new Error("Tweet not found");
+
+    tweet.reply(user.username, content);
+  }
+  
+
+  
   
 }
 

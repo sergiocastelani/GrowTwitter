@@ -29,7 +29,7 @@ export class User {
   //methods
 
   sendTweet(content: string) {
-    let tweet = new Tweet(this._id, content, "Normal");
+    let tweet = new Tweet(this._username, content, "Normal");
     this._tweets.push(tweet);
   }
 
@@ -41,10 +41,13 @@ export class User {
   }
 
   showFeed() {
-    throw new Error("Needs implementation");
+    this.showTweets();
   }
 
   showTweets() {
-    throw new Error("Needs implementation");
+    this._tweets.forEach(tweet => {
+      tweet.show();
+      tweet.showReplies();
+    });
   }
 }

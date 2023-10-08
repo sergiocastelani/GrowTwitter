@@ -38,7 +38,7 @@ export class UserController {
   
   static showFeed(username: string) 
   {
-    let user = UserDb.find(user => user.username == username);
+    let user = UserDb.find(user => user.username === username);
     if (!user)
       throw new Error("User not found");
 
@@ -47,8 +47,11 @@ export class UserController {
 
   static followUser(followerUsername: string, targetUsername: string)
   {
-    let follower = UserDb.find(user => user.username == followerUsername);
-    let target = UserDb.find(user => user.username == targetUsername);
+    if (followerUsername === targetUsername)
+      throw new Error("You can't follow yourself");    
+       
+    let follower = UserDb.find(user => user.username === followerUsername);
+    let target = UserDb.find(user => user.username === targetUsername);
 
     if (!follower || !target)
       throw new Error("User not found");
